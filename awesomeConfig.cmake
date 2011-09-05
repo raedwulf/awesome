@@ -61,8 +61,10 @@ a_find_program(CONVERT_EXECUTABLE convert TRUE)
 include(FindDoxygen)
 # pkg-config
 include(FindPkgConfig)
+# luajit 2.0.0
+include(FindLUAJIT.cmake)
 # lua 5.1
-include(FindLua51) #Due to a cmake bug, you will see Lua50 on screen
+#include(FindLua51) #Due to a cmake bug, you will see Lua50 on screen
 # }}}
 
 # {{{ Check if documentation can be build
@@ -189,7 +191,7 @@ else()
 endif()
 
 # Error check
-if(NOT LUA51_FOUND AND NOT LUA50_FOUND) # This is a workaround to a cmake bug
+if(NOT LUA51_FOUND AND NOT LUA50_FOUND AND NOT LUAJIT_FOUND) # This is a workaround to a cmake bug
     message(FATAL_ERROR "lua library not found")
 endif()
 
@@ -197,12 +199,12 @@ set(AWESOME_REQUIRED_LDFLAGS
     ${AWESOME_COMMON_REQUIRED_LDFLAGS}
     ${AWESOME_REQUIRED_LDFLAGS}
     ${LIB_EV}
-    ${LUA_LIBRARIES})
+    ${LUAJIT_LIBRARIES})
 
 set(AWESOME_REQUIRED_INCLUDE_DIRS
     ${AWESOME_COMMON_REQUIRED_INCLUDE_DIRS}
     ${AWESOME_REQUIRED_INCLUDE_DIRS}
-    ${LUA_INCLUDE_DIR})
+    ${LUAJIT_INCLUDE_DIR})
 # }}}
 
 # {{{ Optional libraries
