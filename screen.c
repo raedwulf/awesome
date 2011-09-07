@@ -443,7 +443,8 @@ luaA_screen_module_index(lua_State *L)
 static int
 luaA_screen_tags(lua_State *L)
 {
-    screen_t *s = luaL_checkudata(L, 1, "screen");
+    //screen_t *s = luaL_checkudata(L, 1, "screen");
+    screen_t *s = lua_touserdata(L, 1);
 
     if(lua_gettop(L) == 2)
     {
